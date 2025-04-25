@@ -9,7 +9,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 
 from settings import RPC_URL
-
+from utils.metrics import add_wallets
 wallets_router: Router = Router()
 
 
@@ -61,6 +61,7 @@ async def handle_wallets_input(
         )
         return
     addresses: List[str] = lines
+    add_wallets(len(addresses))
 
     balances: Dict[str, Decimal] = await fetch_balances(addresses)
     total: Decimal = sum(balances.values())

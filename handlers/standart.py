@@ -4,6 +4,7 @@ from aiogram.fsm.context import FSMContext
 
 from utils.channel import check_user_subscription, create_channels_keyboard
 from handlers.wallets import WalletStates
+from utils.metrics import add_user
 
 standart_router = Router()
 
@@ -28,6 +29,7 @@ async def start_command(message: types.Message, state: FSMContext) -> None:
             reply_markup=keyboard
         )
     else:
+        add_user(user_id)
         # Пользователь уже подписан
         await message.answer("Вы подписаны")
         await message.answer(
