@@ -1,10 +1,12 @@
 from handlers.channels import channels_router
+from handlers.wallets import wallets_router
 from settings import dp, bot
 from handlers.standart import standart_router
 
 
 dp.include_router(standart_router)
 dp.include_router(channels_router)
+dp.include_router(wallets_router)
 
 async def main():
     await bot.delete_webhook(drop_pending_updates=True)
